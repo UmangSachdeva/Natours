@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const AppError = require('./Utils/appError');
@@ -20,6 +21,18 @@ const viewRouter = require('./Routes/viewRotues');
 const bookingRouter = require('./Routes/bookingRoutes');
 
 const app = express();
+// Implement Cors
+app.use(cors());
+// Access-Control-Allow-Origin *
+
+// For only sepecific urls
+// app.use(cors({
+//   origin: 'https://natours.com'
+// }))
+
+app.options('*', cors());
+
+app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));
