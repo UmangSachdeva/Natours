@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -73,6 +74,7 @@ app.use(
 
 // Data sanitization against XSS
 app.use(xss());
+app.use(compression());
 
 app.use(globalErrorHandler);
 

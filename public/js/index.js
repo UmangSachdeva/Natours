@@ -45,7 +45,7 @@ if (submitForm) {
 }
 
 if (submitFormPassword) {
-  console.log(submitFormPassword);
+
   submitFormPassword.addEventListener('submit', async (e) => {
     e.preventDefault();
     document.querySelector('.bnt--save-password').textContent = 'Updating....';

@@ -51,7 +51,7 @@ const $0d79cf94298bf9dd$export$596d806903d1f59e = async (email, password)=>{
     try {
         const res = await axios({
             method: "POST",
-            url: "http://localhost:3000/api/v1/users/login",
+            url: "/api/v1/users/login",
             data: {
                 email: email,
                 password: password
@@ -71,7 +71,7 @@ const $0d79cf94298bf9dd$export$a0973bcfe11b05c9 = async ()=>{
     try {
         const res = await axios({
             method: "GET",
-            url: "http://localhost:3000/api/v1/users/logout"
+            url: "/api/v1/users/logout"
         });
         if (res.data.status == "success") location.reload(true);
     } catch (err) {
@@ -83,17 +83,13 @@ const $0d79cf94298bf9dd$export$a0973bcfe11b05c9 = async ()=>{
 
 const $4c7d9d7488eca5cd$export$f558026a994b6051 = async (data, type)=>{
     try {
-        console.log(data);
-        const url = type === "password" ? "http://localhost:3000/api/v1/users/updatePassword" : "http://localhost:3000/api/v1/users/updateMe";
+        const url = type === "password" ? "/api/v1/users/updatePassword" : "/api/v1/users/updateMe";
         const res = await axios({
             url: url,
             method: "PATCH",
             data: data
         });
-        if (res.data.status === "success") {
-            console.log(res.data);
-            (0, $4182d4385d33a4c1$export$de026b00723010c1)("success", `${type.toUpperCase()} Updated Successfully'`);
-        }
+        if (res.data.status === "success") (0, $4182d4385d33a4c1$export$de026b00723010c1)("success", `${type.toUpperCase()} Updated Successfully'`);
     } catch (err) {
         console.log(err);
         (0, $4182d4385d33a4c1$export$de026b00723010c1)("error", err.response.data.message);
@@ -145,24 +141,21 @@ if ($bd47601420d010cd$var$submitForm) $bd47601420d010cd$var$submitForm.addEventL
     form.append("photo", document.getElementById("photo").files[0]);
     (0, $4c7d9d7488eca5cd$export$f558026a994b6051)(form, "data");
 });
-if ($bd47601420d010cd$var$submitFormPassword) {
-    console.log($bd47601420d010cd$var$submitFormPassword);
-    $bd47601420d010cd$var$submitFormPassword.addEventListener("submit", async (e)=>{
-        e.preventDefault();
-        document.querySelector(".bnt--save-password").textContent = "Updating....";
-        const passwordPrev = document.getElementById("password-current").value;
-        const password = document.getElementById("password").value;
-        const passwordConfirm = document.getElementById("password-confirm").value;
-        await (0, $4c7d9d7488eca5cd$export$f558026a994b6051)({
-            password: password,
-            passwordConfirm: passwordConfirm,
-            passwordPrev: passwordPrev
-        }, "password");
-        document.getElementById("password-current").value = "";
-        document.getElementById("password").value = "";
-        document.getElementById("password-confirm").value = "";
-    });
-}
+if ($bd47601420d010cd$var$submitFormPassword) $bd47601420d010cd$var$submitFormPassword.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    document.querySelector(".bnt--save-password").textContent = "Updating....";
+    const passwordPrev = document.getElementById("password-current").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("password-confirm").value;
+    await (0, $4c7d9d7488eca5cd$export$f558026a994b6051)({
+        password: password,
+        passwordConfirm: passwordConfirm,
+        passwordPrev: passwordPrev
+    }, "password");
+    document.getElementById("password-current").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("password-confirm").value = "";
+});
 if ($bd47601420d010cd$var$bookBtn) $bd47601420d010cd$var$bookBtn.addEventListener("click", (e)=>{
     e.target.textContent = "Processing...";
     const { tourId: tourId } = e.target.dataset;
