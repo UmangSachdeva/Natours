@@ -3,6 +3,7 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alert';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -45,7 +46,6 @@ if (submitForm) {
 }
 
 if (submitFormPassword) {
-
   submitFormPassword.addEventListener('submit', async (e) => {
     e.preventDefault();
     document.querySelector('.bnt--save-password').textContent = 'Updating....';
@@ -70,3 +70,6 @@ if (bookBtn) {
     bookTour(tourId);
   });
 }
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alert) showAlert('success', alert.message, 20);

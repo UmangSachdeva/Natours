@@ -4,6 +4,7 @@ const bookingController = require('../controllers/bookingController.js');
 const authController = require('../controllers/authController');
 
 // Booking Routes
+
 router.post(
   '/checkout-session/:tourID',
   authController.protect,
