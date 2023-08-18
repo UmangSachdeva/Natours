@@ -19,6 +19,7 @@ const userRouter = require('./Routes/userRoutes');
 const errorController = require('./controllers/errorController');
 const viewRouter = require('./Routes/viewRotues');
 const bookingRouter = require('./Routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 
 const app = express();
 // Implement Cors
@@ -62,6 +63,12 @@ app.use('/api', limiter);
 //   console.log('hello from middleware 👋');
 //   next();
 // });
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookcheckout
+);
 
 // Body Parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
